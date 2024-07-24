@@ -1,0 +1,348 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraw Coin</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        :root {
+            --bg-color: #222222;
+            --text-color: #fff;
+        }
+
+        body {
+            font-family: "Press Start 2P", system-ui;
+            overflow: hidden;
+
+            margin: 0;
+            padding: 0;
+
+            background-color: #111111;
+            color: #fff;
+        }
+
+        #loading-screen {
+            position: fixed;
+            
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background-color: var(--bg-color);
+            color: var(--text-color);
+
+            z-index: 9999;
+            display: block;
+
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            opacity: 1;
+
+            transition: opacity 1s;
+        }
+
+        #loading-screen h1 {
+            color: transparent;
+            background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+            background-clip: text;
+        }
+
+        #main {
+            display: none;
+        }
+
+        .energy {
+            font-size: 2.3rem;
+            /* position: absolute; */
+            /* bottom: 20px; */
+            /* left: 20px; */
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            height: calc(2.3rem + 40px + 16px);
+            width: calc(100% - 40px);
+            color: var(--text-color);
+
+            padding: 20px;
+
+            background: var(--bg-color);
+        }
+
+        .energy-indicator {
+            width: 80vw;
+            height: 16px;
+            background: #FC4F4F;
+            margin-top: 15px;
+        }
+
+        .part-indicator {
+            width: 100%;
+            height: 100%;
+            background: #00C0FF;
+
+            transform: scaleY(1.3);
+
+            transition: 0.3s ease-in-out;
+        }
+
+        .balance {
+            font-size: 1.9rem;
+        }
+
+
+        .yellow {
+            color: rgb(255, 217, 0);
+        }
+
+        .gray {
+            color: rgb(128, 128, 128);
+        }
+
+        .coin {
+            width: 200px;
+
+            /* background: white; */
+            border-radius: 50%;
+            
+            overflow: visible;
+        }
+
+        .coin img:active {
+            transform: scale(1.1);
+        }
+
+        .coin img {
+            width: 100%;
+
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+/* 
+        .coin-image-wrapper {
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(30px);
+        } */
+
+        main {
+            height: calc(100% - 5rem);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .logo p {
+            font-size: 1.6rem;
+            background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            height: 3.6rem;
+
+            background-color: #222222;
+
+            padding: 10px;
+        }
+
+        .menu ul {
+            display: flex;
+            list-style: none;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .menu ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        @media screen and (max-width: 500px) {
+            .coin {
+                width: 150px;
+            }
+
+            .menu ul li a {
+                font-size: 0.8rem;
+            }
+
+            .logo p {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .menu ul li a {
+                font-size: 0.6rem;
+            }
+
+            .logo p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div id="loading-screen">
+        <h1>$SCRAW Coin</h1>
+        <p>Loading...</p>
+    </div>
+
+    <div id="main">
+        <header>
+            <div class="logo">
+                <p>$SCRAW<br>COIN</p>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <main>
+            <div class="coin">
+                <div class="coin-img-wrapper">
+                    <img src="https://i.postimg.cc/g00dB3TK/photo-2024-07-24-11-54-18-Photoroom.png" alt="coin">
+                </div>
+            </div>
+            <div class="balance"></div>            
+        </main>
+
+        <footer>
+            <div class="energy"></div>
+            <div class="energy-indicator">
+                <div class="part-indicator"></div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+<script>
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
+function loaded() {
+    console.log("Loaded window!");
+
+    delay(1000).then(() => {
+        document.getElementById("loading-screen").style.opacity = 0;
+        document.getElementById("loading-screen").style.zIndex = -100;
+        document.getElementById("main").style.display = "block";
+    });
+
+    const scrawcoin_instance = new ScrawCoin(
+        document.querySelector("main .coin img"), 
+        document.querySelector("main .balance"), 
+        document.querySelector("footer .energy"), 
+        document.querySelector("footer .part-indicator")
+    );
+
+    setInterval(function () {
+        scrawcoin_instance.draw();
+    }, 100);
+
+    setInterval(function () {
+        scrawcoin_instance.addEnergy();
+    }, 1000);
+}
+
+class ScrawCoin {
+    constructor(coin_elem, balance_elem, energy_elem, energy_indicator_elem) {
+        console.log("ScrawCoin instance created!");
+
+        this.balance_val = 0;
+        this.energy_val = this.maxEnergy = 200;
+
+        this.coin = coin_elem;
+        this.balance = balance_elem;
+        this.energy = energy_elem;
+        this.energy_indicator = energy_indicator_elem;
+
+        this.farmstopped = false;
+
+        let globalthis = this;
+        this.coin.addEventListener("click", function () {
+            console.log("Coin clicked!");
+            globalthis.mine();
+        });
+    }
+
+    draw() {
+        this.energy.innerHTML = this.farmstopped ? `<span class="gray">${this.energy_val}/${this.maxEnergy} $ENERGY</span>` : `${this.energy_val}/${this.maxEnergy} <span class="yellow">$ENERGY</span>`;
+        this.balance.innerText = `${this.balance_val} $SCRAW`;
+
+        this.energy_indicator.style.width = `${this.energy_val / this.maxEnergy * 100}%`;
+
+        if (this.farmstopped) {
+            this.energy_indicator.style.backgroundColor = "#DDDDDD";
+        } else {
+            this.energy_indicator.style.backgroundColor = "#00C0FF";
+        }
+    }
+
+    addEnergy() {
+        if (this.energy_val < this.maxEnergy) {
+            this.energy_val++;
+        }
+    }
+
+    mine() {
+        console.log("Mined!");
+        if (this.energy_val > 1 && !this.farmstopped) {
+            this.balance_val++;
+            this.energy_val--;
+        } else if (!this.farmstopped) {
+            this.balance_val++;
+            this.energy_val--;
+
+            this.farmstopped = true;
+            
+            let globalthis = this;
+            setTimeout(function () {
+                globalthis.farmstopped = false;
+            }, 3000);
+        }
+    }
+}
+
+window.addEventListener("load", loaded);
+
+</script>
+
+</html>
